@@ -1,0 +1,19 @@
+<div class="w-full bg-white py-2 px-2  mt-2 shadow-sm rounded-md flex justify-between items-center
+">
+<div class="flex w-[80%] items-center space-x-3.5">
+  <div>
+    <input type="checkbox" class="peer checkbox" />
+  </div>
+  <div class="w-full">
+    <p class="text-gray-400 peer-checked:line-through">Read a book</p>
+  </div>
+</div>
+  <div class="flex space-x-4 w-[10%] justify-end ">
+    <button class="btn  tooltip" data-tip="Update">
+      <fa-icon class="text-gray-600 text-md" [icon]="fa.faPencil"></fa-icon>
+    </button>
+    <button class="btn tooltip" data-tip="Delete">
+      <fa-icon class="text-red-600 text-md" [icon]="fa.faTrash"></fa-icon>
+    </button>
+  </div>
+</div>

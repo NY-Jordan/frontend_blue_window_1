@@ -1,1 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'tailwindcss';
+@plugin "daisyui";
+
+@layer base {
+
+  body {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+
+  html {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+
+  }
+
+  .input2 {
+    @apply input text-sm  h-11 w-full bg-[#fdfdff] rounded text-gray-600 focus:text-gray-600 border border-gray-200 focus:border-blue-400 focus-within:outline-none
+  }
+
+}
