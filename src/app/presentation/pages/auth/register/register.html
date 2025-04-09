@@ -6,43 +6,80 @@
     </div>
 
     <div >
-      <form class="space-y-6">
+      <form [formGroup]="registerForm"  (ngSubmit)="onSubmit()" class="space-y-6">
         <label class="flex flex-col my-4">
             <div>
               <span class=" label  text-sm">Email <span>*</span></span>
             </div>
             <div class="w-full">
-              <input class="input2 text-xs" type="email" placeholder="Enter your email" />
+              <input class="input2 text-xs" formControlName="email" [ngClass]="{
+                'border-red-500': (f.email.touched && f.email.invalid) || emailExist ,
+                'border-green-500': f.email.valid
+              }" type="email" placeholder="Enter your email" />
             </div>
+            <div *ngIf="f.email.touched && f.email.invalid"  class="text-danger">
+              <small class="text-red-600 text-xs"  *ngIf="f.email?.errors?.['required']">Email is required</small>
+              <small class="text-red-600 text-xs" *ngIf="f.email?.errors?.['email']">The email must be valid.</small>
+            </div>
+            <small class="text-red-600 text-xs" *ngIf="emailExist">Email already in use</small>
+
         </label>
+
         <label class="flex flex-col my-4">
           <div>
             <span class=" label  text-sm">Full Name <span>*</span></span>
           </div>
           <div class="w-full">
-            <input class="input2 text-xs" type="email" placeholder="Enter your email" />
+            <input class="input2 text-xs" formControlName="name" [ngClass]="{
+              'border-red-500': f.name.touched && f.name.invalid,
+              'border-green-500': f.name.valid
+            }"  type="text" placeholder="Enter your full name" />
+          </div>
+          <div *ngIf="f.name.touched && f.name.invalid" class="text-danger">
+            <small class="text-red-600 text-xs" *ngIf="f.name?.errors?.['required']">Name is required</small>
+            <small class="text-red-600 text-xs" *ngIf="f.name?.errors?.['minLength']">The name must be at least 3 characters long.</small>
           </div>
         </label>
+
         <label class="flex flex-col my-4">
           <div>
             <span class=" label  text-sm">Password <span>*</span></span>
           </div>
           <div class="w-full">
-            <input class="input2 text-xs" type="email" placeholder="Enter your password" />
+            <input class="input2 text-xs" [ngClass]="{
+              'border-red-500': f.password.touched && f.password.invalid,
+              'border-green-500': f.password.valid
+            }"  formControlName="password" type="password" placeholder="Enter your password" />
+          </div>
+          <div *ngIf="f.password.touched && f.password.invalid" class="text-danger">
+            <small class="text-red-600 text-xs" *ngIf="f.password?.errors?.['required']">Password is required</small>
+            <small class="text-red-600 text-xs" *ngIf="f.password?.errors?.['minLength']">The password must be at least 3 characters long.</small>
+            <small class="text-red-600 text-xs" *ngIf="f.password?.errors?.['passwordNoNumber']">The password must contain at least one number</small>
           </div>
       </label>
+
       <label class="flex flex-col my-4">
         <div>
           <span class=" label  text-sm">Confirm Password <span>*</span></span>
         </div>
         <div class="w-full">
-          <input class="input2 text-xs" type="password" placeholder="Enter your password" />
+          <input class="input2 text-xs" [ngClass]="{
+            'border-red-500': f.confirmPassword.touched && f.confirmPassword.invalid,
+            'border-green-500': f.confirmPassword.valid
+          }" type="password" formControlName="confirmPassword" placeholder="Enter your password" />
+        </div>
+        <div *ngIf="f.confirmPassword.touched && f.confirmPassword.invalid" class="text-danger">
+          <small class="text-red-600 text-xs" *ngIf="f.confirmPassword?.errors?.['required']">Confirm Password is required</small>
+          <small class="text-red-600 text-xs" *ngIf="f.confirmPassword?.errors?.['passwordsMatch']">confirm password does not match.</small>
         </div>
     </label>
       <label class="w-full">
-        <button class="btn rounded-sm bg-blue-500 hover:bg-blue-700 w-full text-white">Continue</button>
+        <button  type="submit"[disabled]="registerForm.invalid" class="btn rounded-sm bg-blue-500 hover:bg-blue-700 w-full text-white">Continue</button>
       </label>
       </form>
+    </div>
+    <div class="flex justify-center mt-3">
+      <span class="text-sm">already have an account ? Sign In <a [routerLink]="['/auth/login']" class="text-blue-500">here</a> </span>
     </div>
   </div>
 

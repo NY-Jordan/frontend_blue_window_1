@@ -6,27 +6,47 @@
     </div>
 
     <div >
-      <form class="space-y-6">
+      <form [formGroup]="loginForm"  (ngSubmit)="onSubmit()" class="space-y-6">
         <label class="flex flex-col my-4">
             <div>
-              <span class=" label  text-sm">Email <span>*</span></span>
+              <span    class=" label  text-sm">Email <span>*</span></span>
             </div>
             <div class="w-full">
-              <input class="input2 text-xs" type="email" placeholder="Enter your email" />
+              <input formControlName="email" class="input2 text-xs" [ngClass]="{
+                'border-red-500': (f.email.touched && f.email.invalid) || falseCredential ,
+                'border-green-500': f.email.valid
+              }" type="email" placeholder="Enter your email" />
             </div>
+            <div *ngIf="f.email.touched && f.email.invalid && falseCredential "  class="text-danger">
+              <small class="text-red-600 text-xs"  *ngIf="f.email?.errors?.['required']">Email is required</small>
+              <small class="text-red-600 text-xs" *ngIf="f.email?.errors?.['email']">The email must be valid.</small>
+            </div>
+            <small *ngIf="falseCredential" class="text-red-600 text-xs mt-2">Invalid credential, check and try again</small>
+
         </label>
         <label class="flex flex-col my-4">
           <div>
-            <span class=" label  text-sm">Password <span>*</span></span>
           </div>
           <div class="w-full">
-            <input class="input2 text-xs" type="password" placeholder="Enter your password" />
+            <span   class=" label  text-sm">Password <span>*</span></span>
+            <input formControlName="password"  class="input2 text-xs" [ngClass]="{
+              'border-red-500': (f.password.touched && f.password.invalid) || falseCredential ,
+              'border-green-500': f.password.valid
+            }" type="password" placeholder="Enter your password" />
           </div>
+          <div *ngIf="f.password.touched && f.password.invalid" class="text-danger">
+            <small class="text-red-600 text-xs" *ngIf="f.password?.errors?.['required']">Password is required</small>
+          </div>
+          <small *ngIf="falseCredential" class="text-red-600 text-xs">Invalid credential, check and try again</small>
+
       </label>
       <label class="w-full">
         <button class="btn rounded-sm bg-blue-500 hover:bg-blue-700 w-full text-white">Login</button>
       </label>
       </form>
+      <div class="flex justify-center mt-3">
+        <span class="text-sm">don't have an account ? Sign Up <a [routerLink]="['/auth/register']" class="text-blue-500">here</a> </span>
+      </div>
     </div>
   </div>
 
