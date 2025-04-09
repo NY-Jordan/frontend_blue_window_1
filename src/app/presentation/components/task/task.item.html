@@ -2,17 +2,27 @@
 ">
   <div class="flex w-[80%] items-center space-x-3.5 ">
     <div class="flex w-[80%] items-center space-x-3.5">
-      <input type="checkbox" class="peer checkbox" id="checkbox1" />
+      <input type="checkbox" (click)="changeStatus()" [defaultChecked]="(task.status_id === status.completed)" class="peer checkbox" id="checkbox1" />
 
-      <label for="checkbox1" class="text-gray-400 peer-checked:line-through">Read a book</label>
+      <label for="checkbox1" class="text-gray-400 peer-checked:line-through">{{ task.title }}</label>
     </div>
   </div>
-  <div class="flex space-x-4 w-[10%] justify-end ">
-    <button class="btn  tooltip" data-tip="Update">
+  <div class="flex space-x-4 w-[10%] justify-end items-center ">
+    <button class="btn btn-xs  tooltip" data-tip="Update">
       <fa-icon class="text-gray-600 text-md" [icon]="fa.faPencil"></fa-icon>
     </button>
-    <button class="btn tooltip" data-tip="Delete">
+    <button (click)="deleteTask()" class="btn btn-xs tooltip" data-tip="Delete">
       <fa-icon class="text-red-600 text-md" [icon]="fa.faTrash"></fa-icon>
     </button>
+    <button (click)="openViewTaskModal()" class="btn btn-xs  tooltip" data-tip="Update">
+      <fa-icon class="text-gray-600 text-md" [icon]="fa.faEye"></fa-icon>
+    </button>
+
   </div>
+
+  <view-task  [task]="task" [active]="viewTaskModalIsVisible"></view-task>
+
 </div>
+
+
+

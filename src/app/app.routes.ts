@@ -11,5 +11,4 @@ export const routes: Routes = [
   { path: 'auth/login', component: LoginPage,     canActivate: [NoAuthGuard]},
   { path: 'auth/register', component: RegisterPage ,     canActivate: [NoAuthGuard]},
   { path: 'dashboard', component: TaskPage, canActivate: [AuthGuard] },
-  { path: '**', redirectTo: 'auth/login', pathMatch: 'full' }
 ];

@@ -2,31 +2,36 @@
 
   <div class="w-full  h-fit flex  space-y-5 flex-col sm:flex-row justify-between sm:items-center  ">
     <div class="">
-      <h4 class="text-2xl  lg:text-3xl font-bold">Good Morning, Yvan  </h4>
+      <h4 class="text-2xl  lg:text-3xl font-bold">Todo Tasks </h4>
       <span class="text-md  lg:text-lg text-gray-500">Today, {{ currentDate | date : 'fullDate' }} </span>
     </div>
     <div class="flex space-x-4">
-      <div class="h-fit bg-white w-32">
-        <input type="date" class="input2" />
-      </div>
+
       <div class="h-12  w-fit">
-        <button class="btn bg-blue-600 hover:bg-blue-700 rounded-md text-white"><fa-icon [icon]="fa.faPlus"></fa-icon> New Task</button>
+        <button (click)="openCreateTaskModal()" class="btn bg-blue-600 hover:bg-blue-700 rounded-md text-white"><fa-icon [icon]="fa.faPlus"></fa-icon> New Task</button>
       </div>
     </div>
   </div>
 
-  <div class="mt-20">
-    <task-item></task-item>
-    <task-item></task-item>
-    <task-item></task-item>
-    <task-item></task-item>
-    <task-item></task-item>
+  <div class="mt-20" *ngIf="tasks$ | async as tasks">
+    <div *ngFor="let task of tasks" class="p-2 border-b border-gray-200">
+      <task-item [task]="task"></task-item>
+    </div>
+  </div>
+  <div>
+
+    </div>
+    <div *ngIf="(tasks$ | async)?.length === 0" class="w-full flex justify-center  text-center">
+    <span>Your task list is empty.</span>
   </div>
 
-  <div class="flex justify-center items-center mt-40">
+  <div class="flex justify-center items-center mt-2">
     <button  (click)="logout()" class="btn "><fa-icon class="text-red-500" [icon]="fa.faSignOut"></fa-icon>Logout</button>
   </div>
 
+
+
+<create-task [] [active]="createModalIsVisible" [closeCreateTaskModal]="closeCreateTaskModal" ></create-task>
 </div>
 
 

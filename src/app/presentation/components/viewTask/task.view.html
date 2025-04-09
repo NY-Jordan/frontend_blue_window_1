@@ -1,0 +1,21 @@
+<input type="checkbox" [checked]="active" id="my_modal_6" class="modal-toggle" />
+<div class="modal" role="dialog">
+  <div class="modal-box max-w-none space-y-8 overflow-hidden lg:w-[50%]">
+    <h3 class="text-lg font-bold">New Task </h3>
+    <div>
+      <div>
+        <span class="font-bold text-md">Title : </span>
+      </div>
+      <p>{{ task.title }}</p>
+    </div>
+    <div>
+      <div>
+        <span class="font-bold text-md">Description : </span>
+      </div>
+      <p>{{ task.description }}</p>
+    </div>
+    <div class="flex justify-end items-center">
+      <button (click)="closeModal()" htmlFor="my_modal_6" class="btn bg-red-500 hover:bg-red-700 text-white">Close</button>
+    </div>
+  </div>
+</div>
