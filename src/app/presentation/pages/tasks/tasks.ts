@@ -9,7 +9,7 @@ import { TaskItemComponent } from "../../components/task/task.item.component";
 import { AuthService } from '../../../infrasctructure/services/auth/auth.service';
 import { Store, StoreModule } from '@ngrx/store';
 import { taskReducer } from '../../../store/reducers/task.reducer';
-import { Observable } from 'rxjs';
+import { lastValueFrom, Observable } from 'rxjs';
 import { IPagination, ITask } from '../../../domain/entities/task.entities';
 import { AppState } from '../../../store/state';
 import { TaskService } from '../../../infrasctructure/services/task/task.service';
@@ -26,7 +26,7 @@ export class TaskPage {
   currentDate : Date = new Date()
   fa = TaskIcons
   tasks$: Observable<ITask[]>;
-  pagination$: Observable<IPagination>;
+  pagination$: Observable<IPagination|null>;
   loading$: Observable<boolean>;
   error$: Observable<string | null>;
   createModalIsVisible = false
@@ -51,12 +51,8 @@ export class TaskPage {
   }
 
   closeCreateTaskModal() {
-    console.log('ici');
     this.createModalIsVisible = false;
   }
-
-
-
 
   ngOnInit() {
     this.taskService.fetchTasks().subscribe({

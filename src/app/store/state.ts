@@ -2,7 +2,7 @@ import { IPagination, ITask } from "../domain/entities/task.entities";
 
 export interface TaskState {
   tasks: ITask[];
-  pagination : IPagination,
+  pagination : IPagination|null,
   loading: boolean;
   error: string | null;
 }

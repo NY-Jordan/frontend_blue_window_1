@@ -33,7 +33,6 @@ export class NameComponent implements OnInit {
 
    closeModal () {
       this.active = false;
-      this.closeCreateTaskModal();
    }
 
    get f() { return this.createTaskForm.controls; }
